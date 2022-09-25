@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  scope module: 'api' do
+    namespace :v1 do
+      resources :jobs
+      resources :companies do
+        resources :jobs
+      end
+      resources :applies
+      resources :geeks
+      resources :companies
+    end
+  end
+  match "*path", to: "application#catch_404", via: :all
 
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
